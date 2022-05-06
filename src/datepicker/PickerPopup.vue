@@ -84,14 +84,7 @@
 <script lang="ts">
 import { isValid } from 'date-fns'
 import { defineComponent, PropType } from 'vue'
-
-type Item = {
-  key: string
-  value: Date
-  display: number | string
-  disabled: boolean
-  selected: boolean
-}
+import { Item } from './types/Types'
 
 export default defineComponent({
   emits: {

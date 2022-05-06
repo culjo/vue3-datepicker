@@ -182,10 +182,10 @@ export default defineComponent({
      * Week starts with a Monday (1) by default
      */
     weekStartsOn: {
-      type: Number,
+      type: Number as PropType<1 | 2 | 3 | 4 | 5 | 6 | 0>,
       required: false,
       default: 1,
-      validator: (value: any) => [0, 1, 2, 3, 4, 5, 6].includes(value),
+      validator: (value: any): boolean => [0, 1, 2, 3, 4, 5, 6].includes(value),
     },
     /**
      * Disables datepicker and prevents it's opening

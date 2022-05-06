@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watchEffect, PropType } from 'vue'
+import { defineComponent, computed, ref, watchEffect, PropType, ComputedRef } from 'vue'
 import {
   startOfDecade,
   endOfDecade,
@@ -27,6 +27,7 @@ import {
   isValid,
 } from 'date-fns'
 import PickerPopup from './PickerPopup.vue'
+import { Item } from './types/Types'
 
 export default defineComponent({
   components: {
@@ -69,15 +70,15 @@ export default defineComponent({
       return true
     }
 
-    const years = computed(() =>
+    const years: ComputedRef<Item[]> = computed(() =>
       eachYearOfInterval({
         start: from.value,
         end: to.value,
-      }).map((value) => ({
+      }).map((value): Item => ({
         value,
         key: String(getYear(value)),
         display: getYear(value),
-        selected: props.selected && getYear(value) === getYear(props.selected),
+        selected: (props.selected && getYear(value) === getYear(props.selected)) ?? false,
         disabled: !isEnabled(value, props.lowerLimit, props.upperLimit),
       }))
     )

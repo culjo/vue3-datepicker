@@ -38,6 +38,7 @@ import {
 } from 'date-fns'
 import { formatWithOptions } from 'date-fns/fp'
 import PickerPopup from './PickerPopup.vue'
+import { Item } from './types/Types'
 
 export default defineComponent({
   components: {
@@ -149,10 +150,10 @@ export default defineComponent({
 
     const days = computed(() => {
       const dayFormat = format.value(props.format)
-      return eachDayOfInterval(displayedInterval.value).map((value) => ({
+      return eachDayOfInterval(displayedInterval.value).map((value): Item => ({
         value,
         display: dayFormat(value),
-        selected: props.selected && isSameDay(props.selected, value),
+        selected: (props.selected && isSameDay(props.selected, value)) ?? false,
         disabled:
           !isWithinInterval(value, currentMonth.value) ||
           !isEnabled(value, props.lowerLimit, props.upperLimit, props.disabledDates),

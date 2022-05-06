@@ -51,6 +51,7 @@ interface Item {
   value: number
   date: Date
   ref: Ref<null | HTMLElement>
+  selected: boolean
 }
 
 function scrollParentToChild(parent: HTMLElement, child: HTMLElement) {

@@ -35,6 +35,7 @@ import {
 } from 'date-fns'
 import PickerPopup from './PickerPopup.vue'
 import { formatWithOptions } from 'date-fns/fp'
+import { Item } from './types/Types'
 
 export default defineComponent({
   components: {
@@ -100,11 +101,11 @@ export default defineComponent({
       eachMonthOfInterval({
         start: from.value,
         end: to.value,
-      }).map((value) => ({
+      }).map((value): Item => ({
         value,
         display: format.value(value),
         key: format.value(value),
-        selected: props.selected && isSameMonth(props.selected, value),
+        selected: (props.selected && isSameMonth(props.selected, value)) ?? false,
         disabled: !isEnabled(value, props.lowerLimit, props.upperLimit),
       }))
     )
